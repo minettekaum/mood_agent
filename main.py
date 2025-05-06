@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 import os
 from openai import OpenAI
 from fetch_data import fetch_data_sleep_readiness_workout, fetch_data_activity
+from whatsapp import send_whatsapp_message
 
 
 load_dotenv('.env')
@@ -94,10 +95,19 @@ Focus on improvements or changes needed based on the data trends.
     except Exception as e:
         return f"Error: {e}"
 
-# Get real Oura Ring data and user input
-user_data = get_oura_data()
+def main():
+    # Get real Oura Ring data and user input
+    user_data = get_oura_data()
 
-# Generate and print the message
-message = generate_message(user_data)
-print("\nYour Personalized Health Insights:\n")
-print(message)
+    # Generate the message
+    message = generate_message(user_data)
+    
+    # Send the message via WhatsApp
+    if send_whatsapp_message(message):
+        print("Health insights sent to your WhatsApp!")
+    else:
+        print("Failed to send WhatsApp message. Here are your insights:\n")
+        print(message)
+
+if __name__ == "__main__":
+    main()
