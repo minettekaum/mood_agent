@@ -14,7 +14,7 @@ week_ago_str = week_ago.strftime('%Y-%m-%d')
 load_dotenv('.env')
 
 
-def fetch_data_sleep_readiness(url):
+def fetch_data_sleep_readiness_workout(url):
     params={ 
     'start_date': week_ago_str, 
     'end_date': today_str 
@@ -37,6 +37,4 @@ def fetch_data_activity(url):
     return response.json()
 
 
-
-
-   
+    

@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 import os
 from openai import OpenAI
-from fetch_data import fetch_data_sleep_readiness, fetch_data_activity
+from fetch_data import fetch_data_sleep_readiness_workout, fetch_data_activity
 
 
 load_dotenv('.env')
@@ -13,7 +13,7 @@ def get_user_input():
     """Get user's subjective ratings for sleep and stress"""
     while True:
         try:
-            sleep_rating = int(input("How well did you sleep last night? (1-100, where 1 is where you slept for 1 minute and 100 is you slept better than sleeping beauty): "))
+            sleep_rating = int(input("How well did you sleep last night? (1-100,  1 = barely slept, 100 = slept better thansleeping beauty)"))
             if 1 <= sleep_rating <= 100:
                 break
             print("Please enter a number between 1 and 100")
@@ -22,7 +22,7 @@ def get_user_input():
     
     while True:
         try:
-            stress_level = int(input("How stressed do you feel today? (1-100, where 1 is you feel so relaxed that you think you could be deadand 100 is you feel that you are chased by a lion.): "))
+            stress_level = int(input("How stressed do you feel today? (1-100, 1 = totally relaxed 100 = being chased by a lion)"))
             if 1 <= stress_level <= 100:
                 break
             print("Please enter a number between 1 and 100")
@@ -39,9 +39,11 @@ def get_oura_data():
     readiness_url = 'https://api.ouraring.com/v2/usercollection/daily_readiness'
     sleep_url = 'https://api.ouraring.com/v2/usercollection/daily_sleep'
     activity_url = 'https://api.ouraring.com/v2/usercollection/daily_activity'
+    workout_url = 'https://api.ouraring.com/v2/usercollection/daily_workout'
     
-    readiness = fetch_data_sleep_readiness(readiness_url)
-    sleep = fetch_data_sleep_readiness(sleep_url)
+    readiness = fetch_data_sleep_readiness_workout(readiness_url)
+    sleep = fetch_data_sleep_readiness_workout(sleep_url)
+    workout = fetch_data_sleep_readiness_workout(workout_url)
     activity = fetch_data_activity(activity_url)
     
     # Get user's subjective ratings
@@ -51,6 +53,7 @@ def get_oura_data():
         "sleep": sleep,
         "readiness": readiness,
         "activity": activity,
+        "workout": workout,
         "subjective_sleep": user_ratings["subjective_sleep"],
         "stress_level": user_ratings["stress_level"]
     }
@@ -71,8 +74,9 @@ You are a helpful health coach writing personalized daily messages based on the 
 - Sleep Data: {data['sleep']}
 - Readiness Data: {data['readiness']}
 - Activity Data: {data['activity']}
-- Today's Sleep Rating: {data['subjective_sleep']}/100
-- Today's Stress Level: {data['stress_level']}/100
+- Workout Data: {data['workout']}
+- Today's Sleep Rating: {data['subjective_sleep']}/100 (100 = slept better than sleeping beauty, 1 = barely slept)
+- Today's Stress Level: {data['stress_level']}/100 (100 = being chased by a lion, 1 = totally relaxed)
 
 Analyze the trends from the 4-day data. Write 3 practical actions for today and end with a motivational message to help the user achieve their health goals.
 Focus on improvements or changes needed based on the data trends.
