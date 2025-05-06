@@ -4,9 +4,11 @@ import requests
 from datetime import datetime, timedelta
 
 today = datetime.now().date()
-yesterday = today - timedelta(days=1)
+#yesterday = today - timedelta(days=1)
+week_ago = today - timedelta(days=4)
 today_str = today.strftime('%Y-%m-%d')
-yesterday_str = yesterday.strftime('%Y-%m-%d')
+#yesterday_str = yesterday.strftime('%Y-%m-%d')
+week_ago_str = week_ago.strftime('%Y-%m-%d')
 
 
 load_dotenv('.env')
@@ -14,7 +16,7 @@ load_dotenv('.env')
 
 def fetch_data_sleep_readiness(url):
     params={ 
-    'start_date': today_str, 
+    'start_date': week_ago_str, 
     'end_date': today_str 
     }
     headers = { 
@@ -25,7 +27,7 @@ def fetch_data_sleep_readiness(url):
 
 def fetch_data_activity(url):
     params={ 
-    'start_date': yesterday_str, 
+    'start_date': week_ago_str, 
     'end_date': today_str
     }
     headers = { 
