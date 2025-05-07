@@ -3,7 +3,6 @@ import os
 from openai import OpenAI
 from fetch_oura_data import get_all_oura_data
 
-# Load environment variables
 load_dotenv('.env')
 
 # Initialize the client
