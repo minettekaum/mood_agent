@@ -14,7 +14,7 @@ def get_user_input():
     """Get user's subjective ratings for sleep and stress"""
     while True:
         try:
-            sleep_rating = int(input("How well did you sleep last night? (1-100,  1 = barely slept, 100 = slept better thansleeping beauty)"))
+            sleep_rating = int(input("How well did you sleep last night? (1-100,  1 = barely slept, 100 = slept better than sleeping beauty)"))
             if 1 <= sleep_rating <= 100:
                 break
             print("Please enter a number between 1 and 100")
@@ -80,7 +80,7 @@ You are a helpful health coach writing personalized daily messages based on the 
 - Today's Stress Level: {data['stress_level']}/100 (100 = being chased by a lion, 1 = totally relaxed)
 
 Analyze the trends from the 4-day data. Write 3 practical actions for today and end with a motivational message to help the user achieve their health goals.
-Focus on improvements or changes needed based on the data trends.
+Focus on improvements or changes needed based on the data trends. Add emojis to make the message more engaging. The message cannot be longer than 1500 characters.
 """
     try:
         response = client.chat.completions.create(

@@ -24,3 +24,4 @@ def send_whatsapp_message(message):
     except Exception as e:
         print(f"Error sending WhatsApp message: {e}")
         return False
+
