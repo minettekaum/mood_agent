@@ -28,6 +28,9 @@ def send_whatsapp_message(message):
             body=message,
             to=f'whatsapp:{to_number}'
         )
+        time.sleep(2)
+        message = twilio_client.messages(message.sid).fetch()
+
         return True
     except Exception as e:
         return False
@@ -88,6 +91,8 @@ def send_initial_question():
     time.sleep(2)
     initial_message = "How well did you sleep last night? (1-100, 1 = barely slept, 100 = slept better than sleeping beauty)"
     send_whatsapp_message(initial_message)
+
+
 
 if __name__ == "__main__":
     server_thread = threading.Thread(target=start_server)
