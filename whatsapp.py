@@ -69,11 +69,19 @@ class WebhookHandler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header('Content-type', 'text/xml')
             self.end_headers()
-            self.wfile.write(str(resp).encode())
+            try:
+                self.wfile.write(str(resp).encode())
+            except BrokenPipeError:
+                # Connection was closed by client, which is normal
+                pass
             
         except Exception as e:
-            self.send_response(500)
-            self.end_headers()
+            print(f"Error processing webhook: {str(e)}")
+            try:
+                self.send_response(500)
+                self.end_headers()
+            except:
+                pass
 
 def start_server():
     server = HTTPServer(('0.0.0.0', 5001), WebhookHandler)

@@ -42,4 +42,3 @@ Focus on improvements or changes needed based on the data trends. Add emojis to 
 def process_user_data(sleep_rating, stress_level):
     oura_data = get_all_oura_data()
     return generate_health_insights(oura_data, sleep_rating, stress_level)
-
