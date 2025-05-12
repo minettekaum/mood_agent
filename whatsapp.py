@@ -22,18 +22,14 @@ user_responses = {
 }
 
 def send_whatsapp_message(message):
-    try:
-        message = twilio_client.messages.create(
-            from_='whatsapp:+14155238886',
-            body=message,
-            to=f'whatsapp:{to_number}'
-        )
-        time.sleep(2)
-        message = twilio_client.messages(message.sid).fetch()
-
-        return True
-    except Exception as e:
-        return False
+    message = twilio_client.messages.create(
+        from_='whatsapp:+14155238886',
+        body=message,
+        to=f'whatsapp:{to_number}'
+    )
+    time.sleep(2)
+    message = twilio_client.messages(message.sid).fetch()
+    return True
 
 def process_message(message):
     if not message:
@@ -42,17 +38,16 @@ def process_message(message):
         else:
             return "Please rate your stress level from 1-100 (1 = totally relaxed, 100 = being chased by a lion)"
     
-    try:
-        rating = int(message)
-        if 1 <= rating <= 100:
-            if user_responses["sleep_rating"] is None:
-                user_responses["sleep_rating"] = rating
-                return f"Thanks for your sleep rating of {rating}! How stressed do you feel today? (1-100, 1 = totally relaxed, 100 = being chased by a lion)"
-            else:
-                user_responses["stress_level"] = rating
-                return process_user_data(user_responses["sleep_rating"], rating)
-    except ValueError:
-        pass
+    
+    rating = int(message)
+    if 1 <= rating <= 100:
+        if user_responses["sleep_rating"] is None:
+            user_responses["sleep_rating"] = rating
+            return f"Thanks for your sleep rating of {rating}! How stressed do you feel today? (1-100, 1 = totally relaxed, 100 = being chased by a lion)"
+        else:
+            user_responses["stress_level"] = rating
+            return process_user_data(user_responses["sleep_rating"], rating)
+   
     
     if user_responses["sleep_rating"] is None:
         return "Please rate your sleep from 1-100 (1 = barely slept, 100 = slept better than sleeping beauty)"
@@ -81,11 +76,8 @@ class WebhookHandler(BaseHTTPRequestHandler):
             self.end_headers()
 
 def start_server():
-    try:
-        server = HTTPServer(('0.0.0.0', 5001), WebhookHandler)
-        server.serve_forever()
-    except Exception as e:
-        pass
+    server = HTTPServer(('0.0.0.0', 5001), WebhookHandler)
+    server.serve_forever()
 
 def send_initial_question():
     time.sleep(2)
