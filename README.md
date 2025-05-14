@@ -1,8 +1,8 @@
-# Health Insights WhatsApp Bot
+# AI-Powered WhatsApp Mood Tracking Agent
 
 A WhatsApp bot that collects sleep and stress ratings, combines them with Oura Ring data, and provides personalized health insights using GPT-4.
 
-[demo](assets/demo.gif)
+![Demo](assets/demo.gif)
 
 ## Features
 
