@@ -4,6 +4,9 @@ A WhatsApp bot that collects sleep and stress ratings, combines them with Oura R
 
 <img src="assets/demo.gif" width="400" alt="Demo">
 
+<img src="assets/gpt_nano(2)" width="400" alt="answer-1">
+<img src="assets/gpt_nano(3)" width="400" alt="answer-2">
+
 ## Features
 
 - WhatsApp integration for easy interaction
