@@ -2,7 +2,7 @@
 
 A WhatsApp bot that collects sleep and stress ratings, combines them with Oura Ring data, and provides personalized health insights using GPT-4.
 
-![Demo](assets/demo.gif)
+<img src="assets/demo.gif" width="400" alt="Demo">
 
 ## Features
 
