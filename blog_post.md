@@ -1,14 +1,17 @@
 # Building an AI-Powered WhatsApp Mood Tracking Agent
 
-In this tutorial, we'll build a WhatsApp agent that helps users track their mood by collecting sleep quality and stress level ratings. The agent uses Oura Ring data, OpenAI's API, and Twilio's WhatsApp API to create an interactive and personalized health tracking experience.
+In this tutorial, we'll build a WhatsApp agent that helps users track their mood by collecting sleep quality and stress level ratings. The agent uses Oura Ring data, OpenAI's API, and Twilio's WhatsApp API to create an interactive and personalized health tracking experience. This is the end product
+
+<img src="assets/demo.gif" width="400" alt="Demo">
+
 
 ## Prerequisites
 
-- Python 3.7+
-- A Twilio account (sign up at [twilio.com](https://www.twilio.com))
-- OpenAI API key
+- Python 3.8 or higher
 - Oura Ring account and API token
-- ngrok for local development
+- OpenAI API key
+- Twilio account with WhatsApp sandbox
+- ngrok for webhook tunneling
 
 ## Setting Up the Environment
 
@@ -22,7 +25,7 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 2. Install the required packages:
 ```bash
-pip install twilio python-dotenv requests openai
+pip install -r requirements.txt
 ```
 
 3. Create a `.env` file with your credentials:
